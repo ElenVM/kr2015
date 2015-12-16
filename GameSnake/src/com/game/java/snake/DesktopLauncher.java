@@ -1,3 +1,4 @@
+//точка входа в игру
 package com.game.java.snake;
 
 import java.awt.*;
