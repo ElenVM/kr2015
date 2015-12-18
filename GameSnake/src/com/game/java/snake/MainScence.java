@@ -7,6 +7,9 @@ import com.game.java.snake.Direction;
 import com.game.java.snake.Snake;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
+
+import java.util.List;
 
 import static com.game.java.snake.Constant.*;
 
@@ -27,32 +30,31 @@ public class MainScence extends Scence {
 
     @Override
     public void update(long nanosPassed) {
+        processInput();
         if (snakeMoveDelay.updateAndCheck(nanosPassed)) {
             snake.move();
-
             BodyPart head = snake.head();
-
-            //проверка на то что бы змейка не убегала за границы экрана.
-            // при достижении одного из краев, она появляется с противоположной стороны
             if (head.getX() < 1) {
                 head.setX(WORLD_WIDTH);
             }
-
             if (head.getX() > WORLD_WIDTH) {
                 head.setX(1);
             }
-
             if (head.getY() < 1) {
                 head.setY(WORLD_HEIGHT);
             }
-
             if (head.getY() > WORLD_HEIGHT) {
                 head.setY(1);
             }
+            if (head.getX() == apple.getX() && head.getY() == apple.getY()) {
+                List<BodyPart> body = snake.getBody();
+                BodyPart lastPart = body.get(body.size() - 1);
+                body.add(new BodyPart(lastPart.getX(), lastPart.getY()));
+                placeApple();
+            }
         }
-
-
     }
+
 
     @Override
     public void draw(Graphics2D g) {
@@ -109,4 +111,23 @@ public class MainScence extends Scence {
         return true;
     }
 
+
+    private void processInput() {
+        for (KeyEvent event : game.getInput().getKeyPressedEvents()) {
+            switch (event.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                    snake.setDirection(Direction.UP);
+                    break;
+                case KeyEvent.VK_RIGHT:
+                    snake.setDirection(Direction.RIGHT);
+                    break;
+                case KeyEvent.VK_DOWN:
+                    snake.setDirection(Direction.DOWN);
+                    break;
+                case KeyEvent.VK_LEFT:
+                    snake.setDirection(Direction.LEFT);
+                    break;
+            }
+        }
+    }
 }
