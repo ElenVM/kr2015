@@ -1,9 +1,11 @@
-/**
- * Created by Елена Мирошниченко on 15.12.2015.
- */
 package com.game.java.snake;
 
 import java.awt.*;
+
+/**
+ * Created by Елена Мирошниченко on 15.12.2015.
+ */
+
 
 public abstract class Scence {
     protected final Game game;
