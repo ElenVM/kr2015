@@ -25,12 +25,18 @@ public class MainScence extends Scence {
         super(game);
         snake = new Snake(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, Direction.RIGHT); //значит что змейка будет появляться в середине экрана
         placeApple();
-        snakeMoveDelay = new Delay(300);    //змейка двигается каждые 300 миллисекунд
+        snakeMoveDelay = new Delay(200);    //змейка двигается каждые 300 миллисекунд
     }
 
     @Override
     public void update(long nanosPassed) {
+        if (isGameOver()) {
+            game.setScene(new GameOverScence(game));
+            return;
+        }
+
         processInput();
+
         if (snakeMoveDelay.updateAndCheck(nanosPassed)) {
             snake.move();
             BodyPart head = snake.head();
@@ -50,7 +56,13 @@ public class MainScence extends Scence {
                 List<BodyPart> body = snake.getBody();
                 BodyPart lastPart = body.get(body.size() - 1);
                 body.add(new BodyPart(lastPart.getX(), lastPart.getY()));
-                placeApple();
+
+                if (isGameOver()){
+                    game.setScene(new GameOverScence(game));
+                }else {
+                    placeApple();
+                }
+
             }
         }
     }
@@ -58,14 +70,14 @@ public class MainScence extends Scence {
 
     @Override
     public void draw(Graphics2D g) {
-        g.setColor(Color.black);
+        g.setColor(Color.lightGray);
         g.fillRect(0, 0, game.getScreenSize().width, game.getScreenSize().height);
         drawSnake(g);
         drawApple(g);
     }
 
     private void drawSnake(Graphics2D g) {
-        g.setColor(Color.red);
+        g.setColor(Color.blue);
         for (BodyPart bodyPart : snake.getBody()) {
             g.fillRect(
                     bodyPart.getX() * CELL_SIZE - CELL_SIZE,
@@ -76,7 +88,7 @@ public class MainScence extends Scence {
         }
     }
     private void drawApple(Graphics2D g) {
-        g.setColor(Color.green);
+        g.setColor(Color.red);
         g.fillRect(
                 apple.getX() * CELL_SIZE - CELL_SIZE,
                 game.getScreenSize().height - (apple.getY() * CELL_SIZE),
@@ -129,5 +141,21 @@ public class MainScence extends Scence {
                     break;
             }
         }
+    }
+
+    private boolean isGameOver() {
+        if (snake.getBody().size() == WORLD_WIDTH * WORLD_HEIGHT) {
+            return true;
+        }
+
+        for (BodyPart bodyPart : snake.getBody()) {
+            if (bodyPart != snake.head()
+                    && snake.head().getX() == bodyPart.getX()
+                    && snake.head().getY() == bodyPart.getY()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
