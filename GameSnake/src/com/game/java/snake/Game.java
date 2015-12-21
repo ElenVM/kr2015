@@ -11,4 +11,5 @@ public interface Game {
     Dimension getScreenSize();
     Input getInput();
     void setScene(Scence scene);
+    void setData(double time,int steps, int apple);
 }

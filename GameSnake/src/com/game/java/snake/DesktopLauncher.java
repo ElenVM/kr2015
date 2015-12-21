@@ -17,7 +17,8 @@ public class DesktopLauncher {
         Dimension screenSize = new Dimension(screenWidth, screenHeight);
 
         Game game = DesktopGameBuilder.build(new Dimension(640, 480));
-        game.setScene(new MainScence(game));
+        SidePanel panel = DesktopGameBuilder.getPanel();
+        game.setScene(new MainScence(game,panel));
         game.start();
     }
 }

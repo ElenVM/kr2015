@@ -66,6 +66,12 @@ public class CanvasGame extends Canvas implements Game, Runnable {
     public void setScene(Scence scene) {
         this.scene = scene;
     }
+
+    @Override
+    public void setData(double time, int steps, int apple) {
+
+    }
+
     @Override
     public void run() {
         long previousIterationTime = System.nanoTime();

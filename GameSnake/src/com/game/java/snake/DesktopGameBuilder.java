@@ -9,15 +9,17 @@ import java.awt.event.WindowEvent;
  * Created by Елена Мирошниченко on 15.12.2015.
  */
 public class DesktopGameBuilder {
+    public static SidePanel panel;
     public static Game build(Dimension screenSize) {
 
         final CanvasGame game = new CanvasGame(screenSize);
-
+        panel = new SidePanel();
         JFrame frame = new JFrame();
         frame.setFocusable(false);
         frame.setResizable(false);
         frame.setLayout(new BorderLayout());
-        frame.add(game);
+        frame.add(game,BorderLayout.CENTER);
+        frame.add(panel,BorderLayout.WEST);
         frame.pack();
         frame.setVisible(true);
 
@@ -29,6 +31,7 @@ public class DesktopGameBuilder {
 
             @Override
             public void windowClosing(WindowEvent event) {
+
                 game.pause();
             }
         });
@@ -38,4 +41,7 @@ public class DesktopGameBuilder {
         return game;
     }
 
+    public static SidePanel getPanel(){
+        return panel;
+    }
 }

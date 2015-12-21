@@ -20,7 +20,18 @@ public class MainScence extends Scence {
     private Snake snake;
     private Apple apple;
     private Delay snakeMoveDelay;
+    private int appleCount = 0;
+    private int stepsCount = 0;
+    private int mlSeconds =0;
+    private SidePanel panel;
 
+    public MainScence(Game game,SidePanel panel) {
+        super(game);
+        snake = new Snake(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, Direction.RIGHT); //значит что змейка будет появляться в середине экрана
+        placeApple();
+        snakeMoveDelay = new Delay(200);    //змейка двигается каждые 300 миллисекунд
+        this.panel = panel;
+    }
     public MainScence(Game game) {
         super(game);
         snake = new Snake(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, Direction.RIGHT); //значит что змейка будет появляться в середине экрана
@@ -30,14 +41,20 @@ public class MainScence extends Scence {
 
     @Override
     public void update(long nanosPassed) {
+
         if (isGameOver()) {
-            game.setScene(new GameOverScence(game));
+            game.setScene(new GameOverScence(game,panel));
             return;
         }
 
         processInput();
 
         if (snakeMoveDelay.updateAndCheck(nanosPassed)) {
+            stepsCount++;
+            mlSeconds+=200;
+            String seconds=Clock.getTime(mlSeconds);
+            panel.setData(seconds,stepsCount,appleCount);
+
             snake.move();
             BodyPart head = snake.head();
             if (head.getX() < 1) {
@@ -56,9 +73,9 @@ public class MainScence extends Scence {
                 List<BodyPart> body = snake.getBody();
                 BodyPart lastPart = body.get(body.size() - 1);
                 body.add(new BodyPart(lastPart.getX(), lastPart.getY()));
-
+                ++appleCount;
                 if (isGameOver()){
-                    game.setScene(new GameOverScence(game));
+                    game.setScene(new GameOverScence(game,panel));
                 }else {
                     placeApple();
                 }
@@ -77,7 +94,7 @@ public class MainScence extends Scence {
     }
 
     private void drawSnake(Graphics2D g) {
-        g.setColor(Color.blue);
+        g.setColor(panel.getColor());
         for (BodyPart bodyPart : snake.getBody()) {
             g.fillRect(
                     bodyPart.getX() * CELL_SIZE - CELL_SIZE,
