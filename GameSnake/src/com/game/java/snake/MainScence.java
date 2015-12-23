@@ -5,6 +5,7 @@ import com.game.java.snake.Apple;
 import com.game.java.snake.BodyPart;
 import com.game.java.snake.Direction;
 import com.game.java.snake.Snake;
+import javafx.scene.control.Cell;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -20,6 +21,7 @@ public class MainScence extends Scence {
     private Snake snake;
     private Apple apple;
     private Delay snakeMoveDelay;
+    private int delay;
     private int appleCount = 0;
     private int stepsCount = 0;
     private int mlSeconds =0;
@@ -29,21 +31,30 @@ public class MainScence extends Scence {
         super(game);
         snake = new Snake(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, Direction.RIGHT); //значит что змейка будет появляться в середине экрана
         placeApple();
+        delay = 200;
         snakeMoveDelay = new Delay(200);    //змейка двигается каждые 300 миллисекунд
+        this.panel = panel;
+    }
+    public MainScence(Game game,SidePanel panel, int delay) {
+        super(game);
+        snake = new Snake(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, Direction.RIGHT); //значит что змейка будет появляться в середине экрана
+        placeApple();
+        this.delay = delay;
+        snakeMoveDelay = new Delay(delay);    //змейка двигается каждые 300 миллисекунд
         this.panel = panel;
     }
     public MainScence(Game game) {
         super(game);
         snake = new Snake(WORLD_WIDTH / 2, WORLD_HEIGHT / 2, Direction.RIGHT); //значит что змейка будет появляться в середине экрана
         placeApple();
-        snakeMoveDelay = new Delay(200);    //змейка двигается каждые 300 миллисекунд
+        snakeMoveDelay = new Delay(500);    //змейка двигается каждые 300 миллисекунд
     }
 
     @Override
     public void update(long nanosPassed) {
 
         if (isGameOver()) {
-            game.setScene(new GameOverScence(game,panel));
+            game.setScene(new GameOverScence(game,panel, delay));
             return;
         }
 
@@ -75,7 +86,7 @@ public class MainScence extends Scence {
                 body.add(new BodyPart(lastPart.getX(), lastPart.getY()));
                 ++appleCount;
                 if (isGameOver()){
-                    game.setScene(new GameOverScence(game,panel));
+                    game.setScene(new GameOverScence(game,panel, delay));
                 }else {
                     placeApple();
                 }
@@ -105,7 +116,10 @@ public class MainScence extends Scence {
         }
     }
     private void drawApple(Graphics2D g) {
-        g.setColor(Color.red);
+        Color c = new Color(111,111,111);
+        g.setColor(c);
+        Image img1 = Toolkit.getDefaultToolkit().getImage("/apple.png");
+        g.drawImage(img1, apple.getX(), apple.getY(), CELL_SIZE, CELL_SIZE, null);
         g.fillRect(
                 apple.getX() * CELL_SIZE - CELL_SIZE,
                 game.getScreenSize().height - (apple.getY() * CELL_SIZE),
@@ -161,9 +175,9 @@ public class MainScence extends Scence {
     }
 
     private boolean isGameOver() {
-        if (snake.getBody().size() == WORLD_WIDTH * WORLD_HEIGHT) {
+        if (snake.head().getX() == 0 || snake.head().getX() == WORLD_WIDTH ||
+                snake.head().getY() == 0 || snake.head().getY() == WORLD_HEIGHT)
             return true;
-        }
 
         for (BodyPart bodyPart : snake.getBody()) {
             if (bodyPart != snake.head()

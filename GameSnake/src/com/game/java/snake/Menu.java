@@ -4,44 +4,36 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 
 /**
- * Created by Елена Мирошниченко on 20.12.2015.
+ * Created by Елена Мирошниченко on 22.12.2015.
  */
-public class SidePanel extends JPanel implements ActionListener {
-    JLabel labelApple;
-    JLabel labelSteps;
-    JLabel labelTime;
+public class Menu extends JPanel implements ActionListener {
+    JButton start;
+    JButton exit;
+
     JRadioButton buttonblue;
     JRadioButton buttongreen;
     JRadioButton buttonblack;
     ButtonGroup group;
     Color color = Color.BLUE;
+    ActionListener listener;
 
-    public SidePanel(){
+    public Menu(ActionListener listener){
         super();
-        setLayout(new GridLayout(10,1));
-        add(new Label("Apples"));
-        labelApple = new JLabel("0");
-        add(labelApple);
-        add(new Label("Steps"));
-        labelSteps = new JLabel("0");
-        add(labelSteps);
-        add(new Label("Time"));
-        labelTime = new JLabel("0");
-        add(labelTime);
+        this.listener = listener;
+        setLayout(new GridLayout(4,1));
 
-        add(new Label("Snake color"));
+        start = new JButton("Start");
+        exit = new JButton("Exit");
+        exit.addActionListener(listener);
+        start.addActionListener(listener);
+
 
         buttonblack= new JRadioButton("black");
         buttongreen= new JRadioButton("green");
         buttonblue= new JRadioButton("blue");
-
-
-        add(buttonblack);
-        add(buttongreen);
-        add(buttonblue);
-
 
         buttonblack.addActionListener(this);
         buttongreen.addActionListener(this);
@@ -55,13 +47,19 @@ public class SidePanel extends JPanel implements ActionListener {
         buttonblack.setActionCommand("black");
         buttongreen.setActionCommand("green");
         buttonblue.setActionCommand("blue");
+        start.setActionCommand("start");
+        exit.setActionCommand("exit");
+
+        add(buttonblack);
+        add(buttongreen);
+        add(buttonblue);
+        add(start);
+        add(exit);
+        setBounds(100,100,200,200);
+        setVisible(true);
 
     }
-    public void setData(String time,int steps, int apple){
-        labelTime.setText(""+time);
-        labelSteps.setText(""+steps);
-        labelApple.setText(""+apple);
-    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -71,6 +69,7 @@ public class SidePanel extends JPanel implements ActionListener {
             color = Color.blue;
         if("black".equals(e.getActionCommand()))
             color = Color.black;
+
     }
     public Color getColor(){
         return color;

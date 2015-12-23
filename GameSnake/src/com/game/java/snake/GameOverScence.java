@@ -12,9 +12,11 @@ import java.awt.geom.Rectangle2D;
 
 public class GameOverScence extends Scence {
     SidePanel panel;
-    public GameOverScence(Game game,SidePanel panel) {
+    int delay;
+    public GameOverScence(Game game,SidePanel panel,int delay) {
         super(game);
         this.panel = panel;
+        this.delay = delay;
     }
 
     @Override
@@ -22,7 +24,11 @@ public class GameOverScence extends Scence {
         for (KeyEvent event : game.getInput().getKeyPressedEvents()) {
             if (event.getKeyCode() == KeyEvent.VK_ENTER) {
                 panel.setData("0s",0,0);
-                game.setScene(new MainScence(game,panel));
+                game.setScene(new MainScence(game,panel,delay));
+            }
+            if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                panel.setData("0s",0,0);
+                game.setScene(new MenuScene(game,panel));
             }
         }
     }
@@ -35,7 +41,6 @@ public class GameOverScence extends Scence {
         g.setFont(new Font("Default", Font.BOLD, 16));
         g.setColor(Color.white);
 
-        //String message = "Game Over\n";
 
         String message = "Press <Enter> to start new game ";
         Rectangle2D messageBounds = g.getFontMetrics().getStringBounds(message, g);
@@ -54,6 +59,16 @@ public class GameOverScence extends Scence {
         g.drawString(message,
                 game.getScreenSize().width / 2 - messageWidth / 2,
                 game.getScreenSize().height / 2 - 3*messageHeight / 2
+        );
+
+        message = "Press <Esc> to back to menu ";
+        messageBounds = g.getFontMetrics().getStringBounds(message, g);
+        messageWidth = (int)(messageBounds.getWidth());
+        messageHeight = (int)(messageBounds.getHeight());
+
+        g.drawString(message,
+                game.getScreenSize().width / 2 - messageWidth / 2,
+                game.getScreenSize().height / 2 + 3*messageHeight / 2
         );
     }
 }
