@@ -8,9 +8,6 @@ import com.game.java.snake.Snake;
 import javafx.scene.control.Cell;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
-
-import java.util.List;
 
 import static com.game.java.snake.Constant.*;
 
@@ -52,6 +49,7 @@ public class MainScence extends Scence {
 
     @Override
     public void update(long nanosPassed) {
+<<<<<<< HEAD
 
         if (isGameOver()) {
             game.setScene(new GameOverScence(game,panel, delay));
@@ -60,6 +58,8 @@ public class MainScence extends Scence {
 
         processInput();
 
+=======
+>>>>>>> parent of 1f9625a... 0.0.6
         if (snakeMoveDelay.updateAndCheck(nanosPassed)) {
             stepsCount++;
             mlSeconds+=200;
@@ -67,19 +67,27 @@ public class MainScence extends Scence {
             panel.setData(seconds,stepsCount,appleCount);
 
             snake.move();
+
             BodyPart head = snake.head();
+
+            //проверка на то что бы змейка не убегала за границы экрана.
+            // при достижении одного из краев, она появляется с противоположной стороны
             if (head.getX() < 1) {
                 head.setX(WORLD_WIDTH);
             }
+
             if (head.getX() > WORLD_WIDTH) {
                 head.setX(1);
             }
+
             if (head.getY() < 1) {
                 head.setY(WORLD_HEIGHT);
             }
+
             if (head.getY() > WORLD_HEIGHT) {
                 head.setY(1);
             }
+<<<<<<< HEAD
             if (head.getX() == apple.getX() && head.getY() == apple.getY()) {
                 List<BodyPart> body = snake.getBody();
                 BodyPart lastPart = body.get(body.size() - 1);
@@ -92,9 +100,12 @@ public class MainScence extends Scence {
                 }
 
             }
+=======
+>>>>>>> parent of 1f9625a... 0.0.6
         }
-    }
 
+
+    }
 
     @Override
     public void draw(Graphics2D g) {
@@ -154,6 +165,7 @@ public class MainScence extends Scence {
         return true;
     }
 
+<<<<<<< HEAD
 
     private void processInput() {
         for (KeyEvent event : game.getInput().getKeyPressedEvents()) {
@@ -189,4 +201,6 @@ public class MainScence extends Scence {
 
         return false;
     }
+=======
+>>>>>>> parent of 1f9625a... 0.0.6
 }
