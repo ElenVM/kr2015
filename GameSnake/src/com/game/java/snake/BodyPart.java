@@ -1,10 +1,12 @@
-//тело змейки
+//С‚РµР»Рѕ Р·РјРµР№РєРё
 package com.game.java.snake;
 
+import java.io.Serializable;
+
 /**
- * Created by Елена Мирошниченко on 16.12.2015.
+ * Created by Helen  Miroshnichenko on 16.12.2015.
  */
-public class BodyPart {
+public class BodyPart implements Serializable {
     private int x;
     private int y;
 
@@ -14,14 +16,17 @@ public class BodyPart {
     }
 
     public int getX() {
+
         return x;
     }
 
     public void setX(int x) {
+
         this.x = x;
     }
 
     public int getY() {
+
         return y;
     }
 

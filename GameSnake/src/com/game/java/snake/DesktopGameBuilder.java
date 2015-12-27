@@ -1,3 +1,5 @@
+//создает и настраивает игровое окно
+
 package com.game.java.snake;
 
 import javax.swing.*;
@@ -6,7 +8,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- * Created by Елена Мирошниченко on 15.12.2015.
+ * Created by Helen  Miroshnichenko on 15.12.2015.
  */
 public class DesktopGameBuilder {
     public static SidePanel panel;
@@ -42,6 +44,7 @@ public class DesktopGameBuilder {
     }
 
     public static SidePanel getPanel(){
+
         return panel;
     }
 }

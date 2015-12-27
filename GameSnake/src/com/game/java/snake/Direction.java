@@ -3,7 +3,7 @@
 package com.game.java.snake;
 
 /**
- * Created by ≈лена ћирошниченко on 16.12.2015.
+ * Created by Helen  Miroshnichenko on 16.12.2015.
  */
 public enum  Direction {
     UP,
@@ -11,7 +11,7 @@ public enum  Direction {
     DOWN,
     LEFT;
 
-    public int deltaX() {
+    public int deltaX() {   //deltaX, deltaY - возвращают на сколько должна изменитьс€ координата при текущем направлении.
         switch (this) {
             case LEFT:
                 return -1;

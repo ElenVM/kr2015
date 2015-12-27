@@ -1,3 +1,5 @@
+//меню боковое в игре
+
 package com.game.java.snake;
 
 import javax.swing.*;
@@ -7,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 
 /**
- * Created by Елена Мирошниченко on 22.12.2015.
+ * Created by Helen Miroshnichenko on 22.12.2015.
  */
 public class Menu extends JPanel implements ActionListener {
     JButton start;
@@ -25,8 +27,7 @@ public class Menu extends JPanel implements ActionListener {
         this.listener = listener;
         setLayout(new GridLayout(4,1));
 
-        start = new JButton("Start");
-        exit = new JButton("Exit");
+
         exit.addActionListener(listener);
         start.addActionListener(listener);
 
@@ -47,8 +48,6 @@ public class Menu extends JPanel implements ActionListener {
         buttonblack.setActionCommand("black");
         buttongreen.setActionCommand("green");
         buttonblue.setActionCommand("blue");
-        start.setActionCommand("start");
-        exit.setActionCommand("exit");
 
         add(buttonblack);
         add(buttongreen);
@@ -72,6 +71,7 @@ public class Menu extends JPanel implements ActionListener {
 
     }
     public Color getColor(){
+
         return color;
     }
 }

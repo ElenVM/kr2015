@@ -1,7 +1,7 @@
 package com.game.java.snake;
 
 /**
- * Created by ≈лена ћирошниченко on 18.12.2015.
+ * Created by Helen  Miroshnichenko on 18.12.2015.
  */
 
 import javafx.scene.Scene;
@@ -43,7 +43,7 @@ public class GameOverScence extends Scence {
 
 
         String message = "Press <Enter> to start new game ";
-        Rectangle2D messageBounds = g.getFontMetrics().getStringBounds(message, g);
+        Rectangle2D messageBounds = g.getFontMetrics().getStringBounds(message, g); //g.getFontMetrics().getStringBounds - позвол€ет получить размер рисуемой строки в пиксел€х
         int messageWidth = (int)(messageBounds.getWidth());
         int messageHeight = (int)(messageBounds.getHeight());
 

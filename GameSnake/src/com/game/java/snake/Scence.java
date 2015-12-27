@@ -14,7 +14,7 @@ public abstract class Scence {
         this.game = game;
     }
 
-    public abstract void update(long nanosPassed);
+    public abstract void update(long nanosPassed); //nanosPassed - содержит колличество наносекунд, прошедших с последнего обновления
 
     public abstract void draw(Graphics2D g);
 }

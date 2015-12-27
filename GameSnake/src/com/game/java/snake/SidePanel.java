@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Елена Мирошниченко on 20.12.2015.
+ * Created by Helen Miroshnichenko on 20.12.2015.
  */
 public class SidePanel extends JPanel implements ActionListener {
     JLabel labelApple;
@@ -73,6 +73,7 @@ public class SidePanel extends JPanel implements ActionListener {
             color = Color.black;
     }
     public Color getColor(){
+
         return color;
     }
 }

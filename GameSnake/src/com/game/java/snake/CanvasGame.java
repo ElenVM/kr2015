@@ -1,3 +1,5 @@
+// онструктор принимает ширину и высоту экрана, затем создает наш класс Input
+// и подписывает его на событи€ взаимодействи€ с клавиатурой.
 package com.game.java.snake;
 
 import java.awt.*;
@@ -7,7 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 
 /**
- * Created by ≈лена ћирошниченко on 15.12.2015.
+ * Created by Helen  Miroshnichenko on 15.12.2015.
  */
 
 public class CanvasGame extends Canvas implements Game, Runnable {
@@ -29,10 +31,12 @@ public class CanvasGame extends Canvas implements Game, Runnable {
         addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent event) {
+
                 start();
             }
             @Override
             public void focusLost(FocusEvent event) {
+
                 pause();
             }
         });
@@ -56,25 +60,26 @@ public class CanvasGame extends Canvas implements Game, Runnable {
     }
     @Override
     public Dimension getScreenSize() {
+
         return getSize();
     }
     @Override
     public Input getInput() {
+
         return input;
     }
     @Override
     public void setScene(Scence scene) {
+
         this.scene = scene;
     }
 
     @Override
-    public void setData(double time, int steps, int apple) {
-
-    }
+    public void setData(double time, int steps, int apple) {}
 
     @Override
     public void run() {
-        long previousIterationTime = System.nanoTime();
+        long previousIterationTime = System.nanoTime(); //хранит врем€ начала предыдущей итерации цикла
         while (running.get()) {
             if (scene == null) {
                 continue;
@@ -82,7 +87,7 @@ public class CanvasGame extends Canvas implements Game, Runnable {
             long now = System.nanoTime();
             long nanosPassed = now - previousIterationTime;
             previousIterationTime = now;
-            Graphics2D g = (Graphics2D)getBufferStrategy().getDrawGraphics();
+            Graphics2D g = (Graphics2D)getBufferStrategy().getDrawGraphics();   //getBufferStrategy - сообщает окну что нужно отобразить изображение на экране.
             scene.update(nanosPassed);
             scene.draw(g);
             getBufferStrategy().show();

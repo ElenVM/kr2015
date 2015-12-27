@@ -1,12 +1,14 @@
-//размеры яблока
+//СЂР°Р·РјРµСЂС‹ СЏР±Р»РѕРєР°
 
 package com.game.java.snake;
 
 
+import java.io.Serializable;
+
 /**
- * Created by Елена Мирошниченко on 16.12.2015.
+ * Created by Helen  Miroshnichenko on 16.12.2015.
  */
-public class Apple {
+public class Apple implements Serializable{
     private int x;
     private int y;
 

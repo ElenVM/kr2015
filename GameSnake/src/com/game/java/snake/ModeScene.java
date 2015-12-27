@@ -1,7 +1,9 @@
+//меню уровней
+
 package com.game.java.snake;
 
 /**
- * Created by Елена Мирошниченко on 18.12.2015.
+ * Created by Helen Miroshnichenko on 18.12.2015.
  */
 
 import javafx.scene.Scene;
@@ -64,7 +66,7 @@ public class ModeScene extends Scence {
         g.setFont(new Font("Default", Font.BOLD, 32));
         g.setColor(textColor);
         g.drawString("1. Easy",
-                game.getScreenSize().width / 2 - messageWidth / 2,
+                game.getScreenSize().width / 2 - messageWidth / 2 - 5,
                 game.getScreenSize().height / 2 - messageHeight / 2
         );
 
@@ -74,7 +76,7 @@ public class ModeScene extends Scence {
         g.setFont(new Font("Default", Font.BOLD, 32));
         g.setColor(textColor);
         g.drawString("2. Normal",
-                game.getScreenSize().width / 2 - messageWidth / 2 - 12,
+                game.getScreenSize().width / 2 - messageWidth / 2 ,
                 game.getScreenSize().height / 2 + 15
         );
 
@@ -84,7 +86,7 @@ public class ModeScene extends Scence {
         g.setFont(new Font("Default", Font.BOLD, 32));
         g.setColor(textColor);
         g.drawString("3. Hard.",
-                game.getScreenSize().width / 2 - messageWidth / 2 - 16,
+                game.getScreenSize().width / 2 - messageWidth / 2 - 20,
                 game.getScreenSize().height / 2 + 52
         );
     }

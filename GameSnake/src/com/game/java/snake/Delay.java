@@ -1,9 +1,13 @@
+//пока время не станет нужной нам зедержки, в этом случае переменная обнуляется,
+// а мы выполняем нужное нам действие.
 package com.game.java.snake;
 
+import java.io.Serializable;
+
 /**
- * Created by ����� ������������ on 18.12.2015.
+ * Created by Helen  Miroshnichenko on 18.12.2015.
  */
-public class Delay {
+public class Delay implements Serializable {
     private long delayNanos;
     private long passedNanos;
 

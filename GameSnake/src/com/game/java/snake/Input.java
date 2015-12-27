@@ -1,7 +1,9 @@
-/**
- * Created by ≈лена ћирошниченко on 15.12.2015.
- */
+//слушатель кнопок
 package com.game.java.snake;
+
+/**
+ * Created by Helen  Miroshnichenko on 15.12.2015.
+ */
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -9,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class Input implements KeyListener {
-    private final Collection<KeyEvent> keyPressedEvents;
-    private final Collection<KeyEvent> keyReleasedEvents;
+    private final Collection<KeyEvent> keyPressedEvents;    //пользователь нажал какую-то кнопку
+    private final Collection<KeyEvent> keyReleasedEvents;   //пользователь отпустил какую-то кнопку
 
     public Input() {
         keyPressedEvents = new ArrayList<KeyEvent>();
@@ -22,7 +24,7 @@ public class Input implements KeyListener {
     }
 
     @Override
-    public synchronized void keyPressed(KeyEvent event) {
+    public synchronized void keyPressed(KeyEvent event) {   //synchronized - гарантирует, что метод будет использоватьс€ только одним потоком в один момент времени
         keyPressedEvents.add(event);
     }
 

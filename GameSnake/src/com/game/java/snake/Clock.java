@@ -1,7 +1,9 @@
+//переводит с секунд в миллисекунды, для счетчика игры
+
 package com.game.java.snake;
 
 /**
- * Created by Елена Мирошниченко on 20.12.2015.
+ * Created by Helen Miroshnichenko on 20.12.2015.
  */
 public class Clock {
 

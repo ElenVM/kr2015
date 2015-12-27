@@ -1,3 +1,5 @@
+/// меню при входе игры
+
 package com.game.java.snake;
 
 /**
@@ -73,7 +75,7 @@ public class MenuScene extends Scence {
         g.setFont(new Font("Default", Font.BOLD, 32));
         g.setColor(textColor);
         g.drawString("2. Mode",
-                game.getScreenSize().width / 2 - messageWidth / 2 - 12,
+                game.getScreenSize().width / 2 - messageWidth / 2 - 8,
                 game.getScreenSize().height / 2 + 15
         );
 
@@ -83,7 +85,7 @@ public class MenuScene extends Scence {
         g.setFont(new Font("Default", Font.BOLD, 32));
         g.setColor(textColor);
         g.drawString("3. Exit.",
-                game.getScreenSize().width / 2 - messageWidth / 2 - 16,
+                game.getScreenSize().width / 2 - messageWidth / 2 - 20,
                 game.getScreenSize().height / 2 + 52
         );
     }
